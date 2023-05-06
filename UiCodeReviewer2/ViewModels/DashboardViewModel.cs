@@ -5,6 +5,7 @@ using OpenAI.ChatGpt;
 using OpenAI.ChatGpt.Models.ChatCompletion.Messaging;
 using System;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -124,6 +125,34 @@ namespace UiCodeReviewer2.ViewModels
             }
             IsChecked = false;
 
+        }
+
+        [RelayCommand]
+        private void OnDragOver(DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.All;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = false;
+        }
+
+        [RelayCommand]
+        private void OnDrop(DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files != null && files.Length > 0)
+                {
+                    Question = File.ReadAllText(files[0]);
+                    e.Handled = true;
+                }
+            }
         }
 
 

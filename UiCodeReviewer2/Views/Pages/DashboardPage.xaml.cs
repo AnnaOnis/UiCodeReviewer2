@@ -1,4 +1,5 @@
-﻿using Wpf.Ui.Common.Interfaces;
+﻿using System.Windows;
+using Wpf.Ui.Common.Interfaces;
 
 namespace UiCodeReviewer2.Views.Pages
 {
@@ -17,6 +18,7 @@ namespace UiCodeReviewer2.Views.Pages
             ViewModel = viewModel;
 
             InitializeComponent();
+
         }
     }
 }
